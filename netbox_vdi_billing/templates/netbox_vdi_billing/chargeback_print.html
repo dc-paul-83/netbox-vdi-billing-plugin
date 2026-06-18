@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Chargeback – {{ cost_center }} – {{ month }}</title>
@@ -42,20 +42,20 @@
 
 <div class="no-print">
   <button onclick="window.print()" style="padding:8px 20px;background:#1d4ed8;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:11pt">
-    🖨 Als PDF drucken
+    🖨 Print as PDF
   </button>
   <a href="?format=pdf" style="margin-left:12px;padding:8px 20px;background:#059669;color:#fff;text-decoration:none;border-radius:6px;font-size:11pt">
-    ⬇ PDF herunterladen (benötigt reportlab)
+    ⬇ Download PDF (requires reportlab)
   </a>
   <button onclick="window.close()" style="margin-left:12px;padding:8px 20px;background:#e2e8f0;color:#1e293b;border:none;border-radius:6px;cursor:pointer;font-size:11pt">
-    ✕ Schließen
+    ✕ Close
   </button>
 </div>
 
-<h1>Kostenstellen-Abrechnung: {{ cost_center }}</h1>
+<h1>Chargeback Report: {{ cost_center }}</h1>
 <div class="meta">
-  {% if department %}<span><strong>Abteilung:</strong> {{ department }}</span>{% endif %}
-  <span><strong>Zeitraum:</strong> {{ month }}</span>
+  {% if department %}<span><strong>Department:</strong> {{ department }}</span>{% endif %}
+  <span><strong>Period:</strong> {{ month }}</span>
   <span><strong>VMs:</strong> {{ vms|length }}</span>
 </div>
 
@@ -65,25 +65,25 @@
     <div class="kpi-value">{{ vms|length }}</div>
   </div>
   <div class="kpi">
-    <div class="kpi-label">Monatliche Kosten</div>
-    <div class="kpi-value blue">{{ total_monthly|floatformat:2 }} €</div>
+    <div class="kpi-label">Monthly Cost</div>
+    <div class="kpi-value blue">{{ total_monthly|floatformat:2 }}</div>
   </div>
   <div class="kpi">
-    <div class="kpi-label">Jährliche Kosten</div>
-    <div class="kpi-value">{{ total_yearly|floatformat:2 }} €</div>
+    <div class="kpi-label">Annual Cost</div>
+    <div class="kpi-value">{{ total_yearly|floatformat:2 }}</div>
   </div>
 </div>
 
 <table>
   <thead>
     <tr>
-      <th>VM-Name</th>
+      <th>VM Name</th>
       <th>vCPU</th>
       <th>RAM (GB)</th>
-      <th>Zugewiesen an</th>
-      <th>Preisquelle</th>
-      <th>€/Monat</th>
-      <th>€/Jahr</th>
+      <th>Assigned To</th>
+      <th>Pricing Source</th>
+      <th>$/Month</th>
+      <th>$/Year</th>
     </tr>
   </thead>
   <tbody>
@@ -94,22 +94,22 @@
       <td>{{ vm.memory_gb }}</td>
       <td>{{ vm.assigned_to|default:"—" }}</td>
       <td>{{ vm.pricing_source }}</td>
-      <td>{% if vm.cost_monthly > 0 %}{{ vm.cost_monthly|floatformat:2 }} €{% else %}—{% endif %}</td>
-      <td>{% if vm.cost_monthly > 0 %}{% widthratio vm.cost_monthly 1 12 %} €{% else %}—{% endif %}</td>
+      <td>{% if vm.cost_monthly > 0 %}{{ vm.cost_monthly|floatformat:2 }}{% else %}—{% endif %}</td>
+      <td>{% if vm.cost_monthly > 0 %}{% widthratio vm.cost_monthly 1 12 %}{% else %}—{% endif %}</td>
     </tr>
     {% endfor %}
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="5">Gesamt</td>
-      <td>{{ total_monthly|floatformat:2 }} €</td>
-      <td>{{ total_yearly|floatformat:2 }} €</td>
+      <td colspan="5">Total</td>
+      <td>{{ total_monthly|floatformat:2 }}</td>
+      <td>{{ total_yearly|floatformat:2 }}</td>
     </tr>
   </tfoot>
 </table>
 
 <div class="footer">
-  <span>Kostenstelle {{ cost_center }}{% if department %} · {{ department }}{% endif %}</span>
+  <span>Cost Center: {{ cost_center }}{% if department %} · {{ department }}{% endif %}</span>
   <span>{{ month }}</span>
 </div>
 </body>

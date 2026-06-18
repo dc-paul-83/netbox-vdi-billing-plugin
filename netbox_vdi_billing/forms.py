@@ -18,12 +18,12 @@ class VDIBillingProfileForm(NetBoxModelForm):
 class VDIAssignmentForm(NetBoxModelForm):
     virtual_machine = DynamicModelChoiceField(
         queryset=VirtualMachine.objects.all(),
-        label='Virtuelle Maschine',
+        label='Virtual Machine',
     )
     profile = DynamicModelChoiceField(
         queryset=VDIBillingProfile.objects.all(),
         required=False,
-        label='Preisprofil',
+        label='Billing Profile',
     )
 
     class Meta:

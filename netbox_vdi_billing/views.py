@@ -69,7 +69,7 @@ class VDIAssignmentChangeLogView(nb_generic.ObjectChangeLogView):
 # ─── Chargeback Übersicht ─────────────────────────────────────────────────────
 
 def _build_chargeback_groups(assignments):
-    """Gruppiert Zuordnungen nach Kostenstelle und berechnet Summen."""
+    """Group assignments by cost center and calculate totals."""
     raw = defaultdict(lambda: {
         'cost_center': '',
         'department': '',
@@ -78,7 +78,7 @@ def _build_chargeback_groups(assignments):
     })
 
     for a in assignments:
-        key = a.cost_center or '⚠ Keine Kostenstelle'
+        key = a.cost_center or '⚠ No Cost Center'
         grp = raw[key]
         grp['cost_center'] = key
         if not grp['department'] and a.department:
@@ -99,7 +99,7 @@ def _build_chargeback_groups(assignments):
         grp['total_monthly'] += cost
 
     groups = list(raw.values())
-    # Ohne Kostenstelle ans Ende
+    # Push unassigned entries to the bottom
     groups.sort(key=lambda g: (g['cost_center'].startswith('⚠'), g['cost_center'].lower()))
     for g in groups:
         g['total_yearly'] = round(g['total_monthly'] * 12, 2)

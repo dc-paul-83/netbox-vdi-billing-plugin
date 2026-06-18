@@ -3,10 +3,10 @@ from netbox.plugins import PluginConfig
 
 class VDIBillingConfig(PluginConfig):
     name = 'netbox_vdi_billing'
-    verbose_name = 'VDI Abrechnung'
-    description = 'Kostenstellen-basierte VDI-Abrechnung mit Preisprofilen und Chargeback-Reports'
+    verbose_name = 'VDI Billing'
+    description = 'Cost-center-based VDI chargeback with pricing profiles and monthly reports'
     version = '1.0.0'
-    author = 'IT'
+    author = 'dc-paul-83'
     base_url = 'vdi-billing'
     min_version = '4.5.0'
     default_settings = {}

@@ -2,16 +2,16 @@
 
 <div class="card">
   <h5 class="card-header d-flex justify-content-between align-items-center">
-    <span><i class="mdi mdi-currency-eur text-primary"></i> VDI Abrechnung</span>
+    <span><i class="mdi mdi-currency-usd text-primary"></i> VDI Billing</span>
     {% if assignment %}
     <a href="{% url 'plugins:netbox_vdi_billing:vdiassignment_edit' assignment.pk %}"
        class="btn btn-sm btn-outline-primary">
-      <i class="mdi mdi-pencil"></i> Bearbeiten
+      <i class="mdi mdi-pencil"></i> Edit
     </a>
     {% else %}
     <a href="{% url 'plugins:netbox_vdi_billing:vdiassignment_add' %}?virtual_machine={{ vm.pk }}"
        class="btn btn-sm btn-outline-success">
-      <i class="mdi mdi-plus"></i> Zuordnen
+      <i class="mdi mdi-plus"></i> Assign
     </a>
     {% endif %}
   </h5>
@@ -20,7 +20,7 @@
   <div class="card-body">
     <table class="table table-sm">
       <tr>
-        <th class="w-40">Kostenstelle</th>
+        <th class="w-40">Cost Center</th>
         <td>
           {% if assignment.cost_center %}
             <span class="fw-semibold">{{ assignment.cost_center }}</span>
@@ -28,16 +28,16 @@
               <span class="ms-1 badge bg-info text-dark">{{ assignment.department }}</span>
             {% endif %}
           {% else %}
-            <span class="text-warning"><i class="mdi mdi-alert"></i> Nicht zugewiesen</span>
+            <span class="text-warning"><i class="mdi mdi-alert"></i> Not assigned</span>
           {% endif %}
         </td>
       </tr>
       <tr>
-        <th>Zugewiesen an</th>
+        <th>Assigned To</th>
         <td>{{ assignment.assigned_to|default:"—" }}</td>
       </tr>
       <tr>
-        <th>Preisprofil</th>
+        <th>Billing Profile</th>
         <td>
           {% if assignment.profile %}
             <a href="{{ assignment.profile.get_absolute_url }}">{{ assignment.profile }}</a>
@@ -47,7 +47,7 @@
         </td>
       </tr>
       <tr>
-        <th>Preisquelle</th>
+        <th>Pricing Source</th>
         <td>
           <span class="badge {% if assignment.cost_override is not None %}bg-warning text-dark{% else %}bg-light text-dark border{% endif %}">
             {{ assignment.pricing_source }}
@@ -55,19 +55,19 @@
         </td>
       </tr>
       <tr>
-        <th>Kosten/Monat</th>
+        <th>Cost / Month</th>
         <td class="fw-bold {% if assignment.cost_monthly > 0 %}text-primary{% endif %}">
           {% if assignment.cost_monthly > 0 %}
-            {{ assignment.cost_monthly|floatformat:2 }} €
+            {{ assignment.cost_monthly|floatformat:2 }}
           {% else %}
             <span class="text-muted">—</span>
           {% endif %}
         </td>
       </tr>
       <tr>
-        <th>Kosten/Jahr</th>
+        <th>Cost / Year</th>
         <td class="text-muted">
-          {% if assignment.cost_yearly > 0 %}{{ assignment.cost_yearly|floatformat:2 }} €{% else %}—{% endif %}
+          {% if assignment.cost_yearly > 0 %}{{ assignment.cost_yearly|floatformat:2 }}{% else %}—{% endif %}
         </td>
       </tr>
     </table>
@@ -79,7 +79,7 @@
   {% else %}
   <div class="card-body text-muted">
     <i class="mdi mdi-information-outline"></i>
-    Für diese VM wurde noch keine Abrechnungszuordnung angelegt.
+    No billing assignment for this VM yet.
   </div>
   {% endif %}
 </div>
