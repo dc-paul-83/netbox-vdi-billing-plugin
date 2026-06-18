@@ -1,7 +1,16 @@
 # netbox-vdi-billing
 
-NetBox 4.5.x Plugin für kostenstellen-basierte VDI-Abrechnung.  
+[![NetBox 4.5](https://img.shields.io/badge/NetBox-4.5.x-blue)](https://github.com/netbox-community/netbox)
+[![NetBox 4.6](https://img.shields.io/badge/NetBox-4.6.x-blue)](https://github.com/netbox-community/netbox)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-dcpaul83-yellow?logo=buy-me-a-coffee)](https://buymeacoffee.com/dcpaul83)
+
+NetBox 4.5/4.6 Plugin für kostenstellen-basierte VDI-Abrechnung.  
 Berechnet automatisch monatliche Kosten aus VM-Ressourcen (vCPU, RAM, GPU) und gruppiert sie nach Kostenstellen für den internen Chargeback.
+
+---
+
+> ☕ Wenn dir das Plugin hilft, freue ich mich über einen Kaffee: [buymeacoffee.com/dcpaul83](https://buymeacoffee.com/dcpaul83)
 
 ---
 
@@ -118,12 +127,12 @@ Custom Field in NetBox anlegen:
 
 ---
 
-## Installation (NetBox 4.5.x)
+## Installation (NetBox 4.5.x / 4.6.x)
 
 ```bash
 # 1. Plugin installieren
 sudo /opt/netbox/venv/bin/pip install \
-  https://github.com/kottpaul/netbox-vdi-billing/archive/refs/heads/main.tar.gz
+  https://github.com/dc-paul-83/netbox-vdi-billing-plugin/archive/refs/heads/main.tar.gz
 
 # 2. In configuration.py eintragen
 #    PLUGINS = ['netbox_vdi_billing']
@@ -144,7 +153,7 @@ sudo systemctl restart netbox netbox-rq
 
 ```bash
 sudo /opt/netbox/venv/bin/pip install --upgrade --force-reinstall \
-  https://github.com/kottpaul/netbox-vdi-billing/archive/refs/heads/main.tar.gz
+  https://github.com/dc-paul-83/netbox-vdi-billing-plugin/archive/refs/heads/main.tar.gz
 
 cd /opt/netbox
 sudo -u root /opt/netbox/venv/bin/python netbox/manage.py migrate netbox_vdi_billing
